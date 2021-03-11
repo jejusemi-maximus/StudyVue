@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,21 +10,28 @@
 
   <body>
     <div id="me">{{content}}</div>
-    <div id="me2">
-      <span v-bind:title="message">
-        내위에 마우스를 올리면 동적으로 바인딩 된 걸 볼 수 있어!
-      </span>
+    
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+   
     <script>
       var can = new Vue({
         el: "#me",
         data: { content: "안녕!" },
+        beforeCreate() {
+            console.log("인스턴스 초기화")
+        },
+        created() {
+            console.log("인스턴스 만들어짐")
+        },
+        beforeMount() {
+          console.log("templeate 요소 render()함수를 통해 변환") 
+          this.content ="111" 
+        },
+        updated() {
+            this.content = "123"
+        },
       });
-      var can2 = new Vue({
-        el: "#me2",
-        data: { message: "이것은" + Date() + "입니다." },
-      });
+      
     </script>
   </body>
 </html>
